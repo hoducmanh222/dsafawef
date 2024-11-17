@@ -1,0 +1,142 @@
+#:kivy 1.2.0
+
+ScreenManager:
+    AccountScreen:
+    EditProfileScreen:
+
+<AccountScreen>:
+    name: "account"
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: [15, 20, 15, 15]
+        spacing: "10dp"
+
+        MDFillRoundFlatButton:
+            text: "Back to Hello"
+            on_release: app.switch_screen('hello')
+            size_hint_x: 0.3
+
+
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint_y: None
+            height: "200dp"
+            spacing: "10dp"
+            pos_hint: {"center_x": 0.5}
+
+            Image:
+                id: profile_image
+                source: root.profile_image_path
+                size_hint: None, None
+                size: "120dp", "120dp"
+                pos_hint: {"center_x": 0.5}
+
+            MDIconButton:
+                icon: "camera"
+                user_font_size: "24sp"
+                pos_hint: {"center_x": 0.5}
+                theme_text_color: "Custom"
+                text_color: app.theme_cls.primary_color
+                on_release: app.change_avatar()
+
+        MDLabel:
+            id: name_label
+            text: "Name: Melissa Peters"
+            theme_text_color: "Secondary"
+            size_hint_y: None
+            height: "40dp"
+
+        MDLabel:
+            id: dob_label
+            text: "Date of Birth: 23/05/1995"
+            theme_text_color: "Secondary"
+            size_hint_y: None
+            height: "40dp"
+
+        MDLabel:
+            id: country_label
+            text: "Country: Nigeria"
+            theme_text_color: "Secondary"
+            size_hint_y: None
+            height: "40dp"
+
+        MDLabel:
+            id: email_label
+            text: "Email: melpeters@gmail.com"
+            theme_text_color: "Secondary"
+            size_hint_y: None
+            height: "40dp"
+
+        MDLabel:
+            id: password_label
+            text: "Password: ************"
+            theme_text_color: "Secondary"
+            size_hint_y: None
+            height: "40dp"
+
+        MDFillRoundFlatButton:
+            text: "Edit Profile"
+            pos_hint: {"center_x": 0.5}
+            size_hint_x: 0.8
+            on_release: app.switch_to_edit_profile()
+
+<EditProfileScreen>:
+    name: "edit_profile"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: [15, 20, 15, 150]
+        spacing: "10dp"
+
+        MDTopAppBar:
+            title: "Edit Profile"
+            left_action_items: [['arrow-left', lambda x: app.back_to_main()]]
+
+        MDTextField:
+            id: name_field
+            hint_text: "Name"
+            text: "Melissa Peters"
+            mode: "rectangle"
+            size_hint_y: None
+
+        MDTextField:
+            id: dob_field
+            hint_text: "Date of Birth"
+            text: "23/05/1995"
+            mode: "rectangle"
+            size_hint_y: None
+
+        MDTextField:
+            id: country_field
+            hint_text: "Country"
+            text: "Nigeria"
+            mode: "rectangle"
+            size_hint_y: None
+            on_focus: app.show_country_menu(self)
+
+        MDTextField:
+            id: email_field
+            hint_text: "Email"
+            text: "melpeters@gmail.com"
+            mode: "rectangle"
+            size_hint_y: None
+
+        MDTextField:
+            id: password_field
+            hint_text: "Password"
+            password: True
+            text: "************"
+            mode: "rectangle"
+            size_hint_y: None
+
+        MDIconButton:
+            id: password_eye_icon
+            icon: "eye-off"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.toggle_password_visibility()
+
+        MDFillRoundFlatButton:
+            text: "Save changes"
+            pos_hint: {"center_x": 0.5}
+            size_hint_x: 0.8
+            on_release: app.save_changes()

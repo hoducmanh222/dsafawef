@@ -1,0 +1,42 @@
+<DeadlinesScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+
+        MDLabel:
+            text: "Deadlines"
+            halign: "center"
+            font_style: "H5"
+            size_hint_y: None
+            height: dp(50)
+
+        ScrollView:
+            id: deadline_scroll
+            size_hint_y: 1
+            do_scroll_y: True
+
+            BoxLayout:
+                id: deadline_box
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(10)
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(56)
+            spacing: 10
+
+            MDRaisedButton:
+                text: "Back to Hello"
+                on_release: app.switch_screen('hello')
+                size_hint_x: 0.3
+
+            Widget:
+                size_hint_x: 0.4
+
+            MDRaisedButton:
+                text: "Add Deadline"
+                on_release: root.show_add_deadline_dialog()
+                size_hint_x: 0.3

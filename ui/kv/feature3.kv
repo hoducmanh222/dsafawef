@@ -1,0 +1,49 @@
+<Feature3_Screen>:
+    name: 'feature3'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(10)
+
+        MDTopAppBar:
+            title: "Notes Management"
+            elevation: 4
+            left_action_items: [["arrow-left", lambda x: app.switch_screen('hello')]]
+            right_action_items: [["plus", lambda x: root.open_add_note_dialog()]]
+            pos_hint: {"top": 1}
+
+        ScrollView:
+            MDList:
+                id: note_list
+                padding: dp(16)
+                spacing: dp(8)
+
+<ListItemWithCheckbox>:
+    on_release: root.view_note_content()
+    
+    IconLeftWidget:
+        icon: ""
+        MDCheckbox:
+            size_hint: None, None
+            size: dp(48), dp(48)
+            pos_hint: {'center_y': .5}
+            active: root.completed
+            on_active: root.on_checkbox_active(self)
+            
+    IconRightWidget:
+        icon: "pencil"
+        MDIconButton:
+            icon: "pencil"
+            theme_text_color: "Custom"
+            text_color: app.theme_cls.primary_color
+            pos_hint: {'center_y': .5}
+            on_release: root.edit_note()
+            
+    IconRightWidget:
+        icon: "trash-can"
+        MDIconButton:
+            icon: "trash-can"
+            theme_text_color: "Custom"
+            text_color: app.theme_cls.primary_color
+            pos_hint: {'center_y': .5}
+            on_release: root.delete_note()
